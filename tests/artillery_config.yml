@@ -1,0 +1,20 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+      - duration: 60
+        arrivalRate: 10000
+        name: Sustained load
+  payload:
+    path: "users.csv"
+    fields:
+      - "name"
+      - "surname"
+
+scenarios:
+  - name: "Get users"
+    flow:
+      - post:
+          url: "/users"
+          json:
+            name: "{{ name }}"
+            surname: "{{ surname }}"
